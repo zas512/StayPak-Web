@@ -102,7 +102,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
                         {{ formatDate(trip.checkIn) }} – {{ formatDate(trip.checkOut) }} · {{ trip.guestsCount }} {{ trip.guestsCount === 1 ? 'guest' : 'guests' }} · {{ trip.nights }} {{ trip.nights === 1 ? 'night' : 'nights' }}
                       </p>
                       @if (trip.listing?.host) {
-                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Hosted by {{ trip.listing.host?.fullName }}</p>
+                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Hosted by {{ getHostName(trip) }}</p>
                       }
                     </div>
 
@@ -235,6 +235,10 @@ export class TripsComponent implements OnInit {
       case 'cancelled': return 'danger';
       default: return 'default';
     }
+  }
+
+  getHostName(trip: Booking): string {
+    return (trip.listing as any)?.host?.fullName || '';
   }
 
   formatDate(dateStr: string): string {

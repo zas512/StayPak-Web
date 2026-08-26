@@ -6,11 +6,12 @@ import { ListingsService } from '../../core/services/listings.service';
 import { PropertyType, UpdateListingRequest, Listing, ListingStatus, AvailabilityRequest } from '../../core/models/listing.model';
 import { ButtonDirective } from '../../shared/ui/button.directive';
 import { CardComponent } from '../../shared/ui/card.component';
+import { BadgeComponent } from '../../shared/ui/badge.component';
 
 @Component({
   selector: 'app-edit-listing',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ButtonDirective, CardComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ButtonDirective, CardComponent, BadgeComponent],
   template: `
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
       <!-- Header -->
