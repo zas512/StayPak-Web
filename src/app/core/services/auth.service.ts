@@ -140,4 +140,10 @@ export class AuthService {
   googleLogin() {
     window.location.href = `${this.api['baseUrl'].replace('/api', '')}/api/auth/google`;
   }
+
+  handleOAuthCallback(accessToken: string, refreshToken: string) {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    return this.fetchCurrentUser();
+  }
 }

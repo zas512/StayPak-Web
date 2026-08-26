@@ -25,9 +25,10 @@ export interface LoginRequest {
 
 export interface RegisterRequest {
   email: string;
-  phone: string;
+  phone?: string;
   password: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface UpdateProfileRequest {
