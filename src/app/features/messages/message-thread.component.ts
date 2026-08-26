@@ -125,7 +125,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
                       }
                     </div>
                     <img
-                      [src]="message.senderId === currentUserId() ? (authService.currentUser()?.avatarUrl || 'https://ui-avatars.com/api/?name=User&background=059669&color=fff') : (conversation()!.otherUser.avatarUrl || 'https://ui-avatars.com/api/?name=' + conversation()!.otherUser.fullName + '&background=059669&color=fff')"
+                      [src]="message.senderId === currentUserId() ? (this.authService.currentUser()?.avatarUrl || 'https://ui-avatars.com/api/?name=User&background=059669&color=fff') : (conversation()!.otherUser.avatarUrl || 'https://ui-avatars.com/api/?name=' + conversation()!.otherUser.fullName + '&background=059669&color=fff')"
                       [alt]="message.senderId === currentUserId() ? 'You' : conversation()!.otherUser.fullName"
                       class="w-8 h-8 rounded-full object-cover ml-2"
                     />
@@ -167,7 +167,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
 })
 export class MessageThreadComponent implements OnInit, OnDestroy {
   private bookingsService = inject(BookingsService);
-  private authService = inject(AuthService);
+  protected authService = inject(AuthService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 

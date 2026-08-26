@@ -52,7 +52,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
                 placeholder="Ahmed"
                 [(ngModel)]="profileData.firstName"
                 name="firstName"
-                required
+                [required]="true"
                 [error]="firstNameError()"
                 id="firstName"
               ></app-input>
@@ -63,7 +63,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
                 placeholder="Khan"
                 [(ngModel)]="profileData.lastName"
                 name="lastName"
-                required
+                [required]="true"
                 [error]="lastNameError()"
                 id="lastName"
               ></app-input>
@@ -75,8 +75,8 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
               placeholder="you@example.com"
               [(ngModel)]="profileData.email"
               name="email"
-              required
-              disabled
+              [required]="true"
+              [disabled]="true"
               [error]="emailError()"
               id="email"
               hint="Email cannot be changed. Contact support if needed."
@@ -93,7 +93,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
             ></app-input>
 
             <div class="flex items-center gap-3 pt-2">
-              <button appButton type="submit" variant="primary" [loading]="isSavingProfile()" [disabled]="profileForm.invalid">
+              <button appButton type="submit" variant="primary" [loading]="isSavingProfile()" [disabled]="!!profileForm.invalid">
                 Save changes
               </button>
             </div>
@@ -166,7 +166,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
                   placeholder="12345-1234567-1"
                   [(ngModel)]="cnicNumber"
                   name="cnicNumber"
-                  required
+                  [required]="true"
                   [error]="cnicNumberError()"
                   id="cnicNumber"
                   hint="Format: XXXXX-XXXXXXX-X"

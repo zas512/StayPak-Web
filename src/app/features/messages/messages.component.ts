@@ -74,7 +74,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
                           <p class="text-sm text-gray-500 dark:text-gray-400 truncate">{{ conversation.listing.city }}</p>
                         </div>
                         @if (conversation.lastMessage?.sentAt) {
-                          <span class="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap">{{ formatRelativeTime(conversation.lastMessage.sentAt) }}</span>
+                          <span class="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap">{{ formatRelativeTime(conversation.lastMessage!.sentAt) }}</span>
                         }
                       </div>
                       <div class="flex items-center justify-between mt-2">

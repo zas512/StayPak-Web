@@ -47,7 +47,7 @@ import { CardComponent } from '../../shared/ui/card.component';
               placeholder="you@example.com"
               [(ngModel)]="credentials.email"
               name="email"
-              required
+              [required]="true"
               [error]="emailError()"
               id="email"
               autocomplete="email"
@@ -59,7 +59,7 @@ import { CardComponent } from '../../shared/ui/card.component';
               placeholder="••••••••"
               [(ngModel)]="credentials.password"
               name="password"
-              required
+              [required]="true"
               [error]="passwordError()"
               id="password"
               autocomplete="current-password"
@@ -73,7 +73,7 @@ import { CardComponent } from '../../shared/ui/card.component';
               <a routerLink="/auth/forgot-password" class="text-sm text-emerald-600 dark:text-emerald-400 hover:underline">Forgot password?</a>
             </div>
 
-            <button appButton type="submit" variant="primary" size="lg" class="w-full" [loading]="isLoading()" [disabled]="loginForm.invalid">
+            <button appButton type="submit" variant="primary" size="lg" class="w-full" [loading]="isLoading()" [disabled]="!!loginForm.invalid">
               Sign in
             </button>
           </form>

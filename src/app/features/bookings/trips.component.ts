@@ -30,7 +30,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
           @for (tab of tabs; track tab.value) {
             <button
               type="button"
-              (click)="activeTab.set(tab.value)"
+              (click)="setActiveTab(tab.value)"
               class="px-4 py-2 rounded-md text-sm font-medium transition-colors"
               [class]="activeTab() === tab.value
                 ? 'bg-emerald-600 text-white shadow-sm'
@@ -102,7 +102,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
                         {{ formatDate(trip.checkIn) }} – {{ formatDate(trip.checkOut) }} · {{ trip.guestsCount }} {{ trip.guestsCount === 1 ? 'guest' : 'guests' }} · {{ trip.nights }} {{ trip.nights === 1 ? 'night' : 'nights' }}
                       </p>
                       @if (trip.listing?.host) {
-                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Hosted by {{ trip.listing.host.fullName }}</p>
+                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Hosted by {{ trip.listing.host?.fullName }}</p>
                       }
                     </div>
 
@@ -174,10 +174,14 @@ export class TripsComponent implements OnInit {
   activeTab = signal<'upcoming' | 'past' | 'cancelled'>('upcoming');
 
   tabs = [
-    { value: 'upcoming', label: 'Upcoming' },
-    { value: 'past', label: 'Past' },
-    { value: 'cancelled', label: 'Cancelled' },
+    { value: 'upcoming' as const, label: 'Upcoming' },
+    { value: 'past' as const, label: 'Past' },
+    { value: 'cancelled' as const, label: 'Cancelled' },
   ];
+
+  setActiveTab(value: 'upcoming' | 'past' | 'cancelled') {
+    this.activeTab.set(value);
+  }
 
   filteredTrips = computed(() => {
     const now = new Date();

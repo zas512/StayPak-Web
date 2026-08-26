@@ -245,7 +245,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
                         Sign in to book
                       </button>
                     } @else if (isOwnListing()) {
-                      <button appButton variant="outline" size="lg" class="w-full" disabled>
+                      <button appButton variant="outline" size="lg" class="w-full" [disabled]="true">
                         This is your listing
                       </button>
                     } @else if (bookingError()) {

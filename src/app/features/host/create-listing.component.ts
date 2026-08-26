@@ -6,14 +6,12 @@ import { ListingsService } from '../../core/services/listings.service';
 import { AuthService } from '../../core/services/auth.service';
 import { PropertyType, CreateListingRequest, Listing, AvailabilityRequest } from '../../core/models/listing.model';
 import { ButtonDirective } from '../../shared/ui/button.directive';
-import { InputComponent } from '../../shared/ui/input.component';
 import { CardComponent } from '../../shared/ui/card.component';
-import { BadgeComponent } from '../../shared/ui/badge.component';
 
 @Component({
   selector: 'app-create-listing',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ButtonDirective, InputComponent, CardComponent, BadgeComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ButtonDirective, CardComponent],
   template: `
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
       <!-- Header -->

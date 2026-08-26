@@ -47,7 +47,7 @@ import { CardComponent } from '../../shared/ui/card.component';
                 placeholder="Ahmed"
                 [(ngModel)]="formData.firstName"
                 name="firstName"
-                required
+                [required]="true"
                 [error]="firstNameError()"
                 id="firstName"
                 autocomplete="given-name"
@@ -59,7 +59,7 @@ import { CardComponent } from '../../shared/ui/card.component';
                 placeholder="Khan"
                 [(ngModel)]="formData.lastName"
                 name="lastName"
-                required
+                [required]="true"
                 [error]="lastNameError()"
                 id="lastName"
                 autocomplete="family-name"
@@ -72,7 +72,7 @@ import { CardComponent } from '../../shared/ui/card.component';
               placeholder="you@example.com"
               [(ngModel)]="formData.email"
               name="email"
-              required
+              [required]="true"
               [error]="emailError()"
               id="email"
               autocomplete="email"
@@ -95,7 +95,7 @@ import { CardComponent } from '../../shared/ui/card.component';
               placeholder="••••••••"
               [(ngModel)]="formData.password"
               name="password"
-              required
+              [required]="true"
               [error]="passwordError()"
               id="password"
               autocomplete="new-password"
@@ -108,7 +108,7 @@ import { CardComponent } from '../../shared/ui/card.component';
               placeholder="••••••••"
               [(ngModel)]="formData.confirmPassword"
               name="confirmPassword"
-              required
+              [required]="true"
               [error]="confirmPasswordError()"
               id="confirmPassword"
               autocomplete="new-password"
@@ -129,7 +129,7 @@ import { CardComponent } from '../../shared/ui/card.component';
               </label>
             </div>
 
-            <button appButton type="submit" variant="primary" size="lg" class="w-full" [loading]="isLoading()" [disabled]="registerForm.invalid">
+            <button appButton type="submit" variant="primary" size="lg" class="w-full" [loading]="isLoading()" [disabled]="!!registerForm.invalid">
               Create account
             </button>
           </form>

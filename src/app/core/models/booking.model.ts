@@ -23,6 +23,7 @@ export interface Booking {
     id: string;
     title: string;
     city: string;
+    area?: string;
     photos: { cdnUrl: string; isCover: boolean }[];
     host: { id: string; fullName: string; avatarUrl?: string; phone?: string; email: string };
   };
@@ -96,6 +97,16 @@ export interface Message {
   booking?: { id: string; listing: { id: string; title: string } };
 }
 
+export interface Review {
+  id: string;
+  bookingId: string;
+  reviewerId: string;
+  rating: number;
+  comment?: string;
+  createdAt: string;
+  reviewer?: { id: string; fullName: string; avatarUrl?: string };
+}
+
 export interface CreateMessageRequest {
   bookingId: string;
   body: string;
@@ -109,7 +120,7 @@ export interface MessageQueryParams {
 
 export interface Conversation {
   bookingId: string;
-  listing: { id: string; title: string; city: string; photos: { cdnUrl: string; isCover: boolean }[] };
+  listing: { id: string; title: string; city: string; area?: string; photos: { cdnUrl: string; isCover: boolean }[] };
   otherUser: { id: string; fullName: string; avatarUrl?: string };
   lastMessage?: Message;
   unreadCount: number;
