@@ -24,9 +24,9 @@ export interface Booking {
     title: string;
     city: string;
     photos: { cdnUrl: string; isCover: boolean }[];
-    host: { id: string; fullName: string; avatarUrl?: string; phone: string; email: string };
+    host: { id: string; fullName: string; avatarUrl?: string; phone?: string; email: string };
   };
-  guest?: { id: string; fullName: string; avatarUrl?: string; phone: string; email: string };
+  guest?: { id: string; fullName: string; avatarUrl?: string; phone?: string; email: string };
   payments?: Payment[];
   messages?: Message[];
   reviews?: Review[];

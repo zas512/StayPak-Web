@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ButtonComponent } from '../../shared/ui/button.component';
+import { ButtonDirective } from '../../shared/ui/button.directive';
 import { CardComponent } from '../../shared/ui/card.component';
 
 @Component({
   selector: 'app-help',
   standalone: true,
-  imports: [CommonModule, RouterLink, ButtonComponent, CardComponent],
+  imports: [CommonModule, RouterLink, ButtonDirective, CardComponent],
   template: `
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

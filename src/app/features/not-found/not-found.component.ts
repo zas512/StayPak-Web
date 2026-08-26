@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ButtonComponent } from '../../shared/ui/button.component';
+import { ButtonDirective } from '../../shared/ui/button.directive';
 import { CardComponent } from '../../shared/ui/card.component';
 
 @Component({
   selector: 'app-not-found',
   standalone: true,
-  imports: [CommonModule, RouterLink, ButtonComponent, CardComponent],
+  imports: [CommonModule, RouterLink, ButtonDirective, CardComponent],
   template: `
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4">
       <div class="text-center max-w-md">

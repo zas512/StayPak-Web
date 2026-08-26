@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { BookingsService } from '../../core/services/bookings.service';
 import { AuthService } from '../../core/services/auth.service';
 import { Message, Conversation } from '../../core/models/booking.model';
-import { ButtonComponent } from '../../shared/ui/button.component';
+import { ButtonDirective } from '../../shared/ui/button.directive';
 import { InputComponent } from '../../shared/ui/input.component';
 import { CardComponent } from '../../shared/ui/card.component';
 import { BadgeComponent } from '../../shared/ui/badge.component';
@@ -13,7 +13,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
 @Component({
   selector: 'app-message-thread',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ButtonComponent, InputComponent, CardComponent, BadgeComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ButtonDirective, InputComponent, CardComponent, BadgeComponent],
   template: `
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
       @if (isLoading()) {

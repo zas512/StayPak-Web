@@ -5,14 +5,14 @@ import { Router, RouterLink } from '@angular/router';
 import { BookingsService } from '../../core/services/bookings.service';
 import { AuthService } from '../../core/services/auth.service';
 import { Conversation } from '../../core/models/booking.model';
-import { ButtonComponent } from '../../shared/ui/button.component';
+import { ButtonDirective } from '../../shared/ui/button.directive';
 import { CardComponent } from '../../shared/ui/card.component';
 import { BadgeComponent } from '../../shared/ui/badge.component';
 
 @Component({
   selector: 'app-messages',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ButtonComponent, CardComponent, BadgeComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ButtonDirective, CardComponent, BadgeComponent],
   template: `
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

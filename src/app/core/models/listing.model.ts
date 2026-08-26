@@ -77,7 +77,7 @@ export interface ListingQueryParams {
   page?: number;
   limit?: number;
   city?: string;
-  propertyType?: PropertyType;
+  propertyType?: PropertyType | PropertyType[];
   minPrice?: number;
   maxPrice?: number;
   minGuests?: number;

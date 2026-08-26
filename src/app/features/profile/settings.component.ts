@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { User, UpdateProfileRequest } from '../../core/models/user.model';
-import { ButtonComponent } from '../../shared/ui/button.component';
+import { ButtonDirective } from '../../shared/ui/button.directive';
 import { InputComponent } from '../../shared/ui/input.component';
 import { CardComponent } from '../../shared/ui/card.component';
 import { BadgeComponent } from '../../shared/ui/badge.component';
@@ -12,7 +12,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ButtonComponent, InputComponent, CardComponent, BadgeComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ButtonDirective, InputComponent, CardComponent, BadgeComponent],
   template: `
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

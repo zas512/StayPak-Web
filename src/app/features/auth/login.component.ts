@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
-import { ButtonComponent } from '../../shared/ui/button.component';
+import { ButtonDirective } from '../../shared/ui/button.directive';
 import { InputComponent } from '../../shared/ui/input.component';
 import { CardComponent } from '../../shared/ui/card.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ButtonComponent, InputComponent, CardComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ButtonDirective, InputComponent, CardComponent],
   template: `
     <div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-12">
       <div class="max-w-md w-full">
