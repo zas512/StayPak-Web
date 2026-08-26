@@ -1,4 +1,4 @@
-import { Component, input, output, forwardRef } from '@angular/core';
+import { Component, input, forwardRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -60,6 +60,9 @@ export class InputComponent implements ControlValueAccessor {
   onChange = (value: string) => {};
   onTouched = () => {};
 
+  // Internal disabled state for ControlValueAccessor
+  internalDisabled = signal(false);
+
   errorId = () => `${this.id()}-error`;
   hintId = () => `${this.id()}-hint`;
 
@@ -86,6 +89,11 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
+    this.internalDisabled.set(isDisabled);
+  }
+
+  // Combine external disabled input with internal disabled state
+  protected get isDisabled(): boolean {
+    return this.disabled() || this.internalDisabled();
   }
 }

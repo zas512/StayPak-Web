@@ -374,7 +374,7 @@ export class ListingsPageComponent implements OnInit {
   }
 
   togglePropertyType(type: PropertyType) {
-    const current = this.searchParams.propertyType || [];
+    const current = (this.searchParams.propertyType as PropertyType[]) || [];
     const index = current.indexOf(type);
     if (index > -1) {
       current.splice(index, 1);
@@ -415,7 +415,7 @@ export class ListingsPageComponent implements OnInit {
       this.searchParams.maxPrice ||
       this.searchParams.instantBook ||
       this.searchParams.amenities?.length ||
-      this.searchParams.minGuests > 1
+      (this.searchParams.minGuests ?? 1) > 1
     );
   });
 
@@ -426,7 +426,7 @@ export class ListingsPageComponent implements OnInit {
     if (this.searchParams.maxPrice) count++;
     if (this.searchParams.instantBook) count++;
     if (this.searchParams.amenities?.length) count += this.searchParams.amenities.length;
-    if (this.searchParams.minGuests > 1) count++;
+    if ((this.searchParams.minGuests ?? 1) > 1) count++;
     return count;
   });
 

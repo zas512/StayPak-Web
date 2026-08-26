@@ -195,15 +195,20 @@ export class MainLayoutComponent {
   mobileMenuOpen = signal(false);
   showUserMenu = signal(false);
   unreadCount = signal(0);
+  isDark = signal(false);
 
   constructor(
-    public auth: AuthService,
+    private auth: AuthService,
     private router: Router,
   ) {}
 
-  isAuthenticated = this.auth.isAuthenticated;
-  currentUser = this.auth.currentUser;
-  isDark = signal(false);
+  get isAuthenticated() {
+    return this.auth.isAuthenticated;
+  }
+
+  get currentUser() {
+    return this.auth.currentUser;
+  }
 
   isHost = computed(() => {
     const user = this.currentUser();

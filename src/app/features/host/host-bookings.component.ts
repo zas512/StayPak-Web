@@ -9,6 +9,8 @@ import { CardComponent } from '../../shared/ui/card.component';
 import { BadgeComponent } from '../../shared/ui/badge.component';
 import { InputComponent } from '../../shared/ui/input.component';
 
+type BookingFilter = BookingStatus | 'all';
+
 @Component({
   selector: 'app-host-bookings',
   standalone: true,
@@ -268,11 +270,11 @@ export class HostBookingsComponent implements OnInit {
   totalPages = signal(1);
   updatingIds = signal<string[]>([]);
 
-  currentFilter = signal<BookingStatus | 'all'>('all');
+  currentFilter = signal<BookingFilter>('all');
   cancelBooking = signal<Booking | null>(null);
   cancelReason = '';
 
-  bookingStatuses: (BookingStatus | 'all')[] = ['all', 'pending', 'confirmed', 'cancelled', 'completed'];
+  bookingStatuses: BookingFilter[] = ['all', 'pending', 'confirmed', 'cancelled', 'completed'];
 
   filteredBookings = computed(() => {
     const filter = this.currentFilter();
@@ -288,7 +290,9 @@ export class HostBookingsComponent implements OnInit {
   loadBookings(page = 1) {
     this.isLoading.set(true);
     this.currentPage.set(page);
-    this.bookingsService.getAll({ page, limit: this.limit, status: this.currentFilter() === 'all' ? undefined : this.currentFilter() }).subscribe({
+    const filter = this.currentFilter();
+    const status = filter === 'all' ? undefined : filter;
+    this.bookingsService.getAll({ page, limit: this.limit, status }).subscribe({
       next: (response) => {
         this.allBookings.set(response.data);
         this.totalPages.set(response.meta.totalPages);

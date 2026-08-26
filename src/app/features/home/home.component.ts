@@ -5,15 +5,13 @@ import { RouterLink } from '@angular/router';
 import { ListingsService } from '../../core/services/listings.service';
 import { AuthService } from '../../core/services/auth.service';
 import { Listing, ListingQueryParams } from '../../core/models/listing.model';
-import { ButtonComponent } from '../../shared/ui/button.component';
-import { InputComponent } from '../../shared/ui/input.component';
-import { CardComponent } from '../../shared/ui/card.component';
+import { ButtonDirective } from '../../shared/ui/button.directive';
 import { BadgeComponent } from '../../shared/ui/badge.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ButtonComponent, InputComponent, CardComponent, BadgeComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ButtonDirective, BadgeComponent],
   template: `
     <div class="min-h-screen">
       <!-- Hero Section -->

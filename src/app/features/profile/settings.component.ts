@@ -176,7 +176,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
                   <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">CNIC Front Photo</label>
                   <label class="inline-block cursor-pointer">
                     <input type="file" accept="image/*" (change)="onCnicSelect($event)" class="sr-only" #cnicInput>
-                    <button appButton variant="outline" [loading]="isUploadingCnic()" type="button" [disabled]="!cnicNumber || cnicNumberError()">
+                    <button appButton variant="outline" [loading]="isUploadingCnic()" type="button" [disabled]="!cnicNumber || !!cnicNumberError()">
                       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                       </svg>
@@ -212,7 +212,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
               placeholder="••••••••"
               [(ngModel)]="passwordData.currentPassword"
               name="currentPassword"
-              required
+              [required]="true"
               [error]="currentPasswordError()"
               id="currentPassword"
             ></app-input>
@@ -223,7 +223,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
               placeholder="••••••••"
               [(ngModel)]="passwordData.newPassword"
               name="newPassword"
-              required
+              [required]="true"
               [error]="newPasswordError()"
               id="newPassword"
               [hint]="passwordHint()"
@@ -235,12 +235,12 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
               placeholder="••••••••"
               [(ngModel)]="passwordData.confirmPassword"
               name="confirmPassword"
-              required
+              [required]="true"
               [error]="confirmPasswordError()"
               id="confirmPassword"
             ></app-input>
 
-            <button appButton type="submit" variant="primary" [loading]="isChangingPassword()" [disabled]="passwordForm.invalid">
+            <button appButton type="submit" variant="primary" [loading]="isChangingPassword()" [disabled]="!!passwordForm.invalid">
               Update password
             </button>
           </form>
