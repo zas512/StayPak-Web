@@ -2,17 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { StorageService } from './storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private storage: StorageService,
+  ) {}
 
   private getHeaders(includeAuth = true): HttpHeaders {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     if (includeAuth) {
-      const token = localStorage.getItem('accessToken');
+      const token = this.storage.getItem('accessToken');
       if (token) {
         headers = headers.set('Authorization', `Bearer ${token}`);
       }
@@ -73,10 +77,10 @@ export class ApiService {
         formData.append(key, additionalData[key]);
       });
     }
-    const token = localStorage.getItem('accessToken');
-    const headers = new HttpHeaders();
+    const token = this.storage.getItem('accessToken');
+    let headers = new HttpHeaders();
     if (token) {
-      headers.set('Authorization', `Bearer ${token}`);
+      headers = headers.set('Authorization', `Bearer ${token}`);
     }
     return this.http.post<T>(`${this.baseUrl}${endpoint}`, formData, { headers });
   }

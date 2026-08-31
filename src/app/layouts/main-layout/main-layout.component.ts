@@ -2,6 +2,7 @@ import { Component, signal, computed } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
+import { StorageService } from '../../core/services/storage.service';
 import { User } from '../../core/models/user.model';
 
 @Component({
@@ -200,6 +201,7 @@ export class MainLayoutComponent {
   constructor(
     private auth: AuthService,
     private router: Router,
+    private storage: StorageService,
   ) {}
 
   get isAuthenticated() {
@@ -221,7 +223,8 @@ export class MainLayoutComponent {
   }
 
   initTheme() {
-    const saved = localStorage.getItem('theme');
+    if (!this.storage.isBrowser) return;
+    const saved = this.storage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const isDark = saved ? saved === 'dark' : prefersDark;
     this.isDark.set(isDark);
@@ -231,11 +234,12 @@ export class MainLayoutComponent {
   toggleTheme() {
     const newValue = !this.isDark();
     this.isDark.set(newValue);
-    localStorage.setItem('theme', newValue ? 'dark' : 'light');
+    this.storage.setItem('theme', newValue ? 'dark' : 'light');
     this.applyTheme(newValue);
   }
 
   applyTheme(isDark: boolean) {
+    if (!this.storage.isBrowser) return;
     document.documentElement.classList.toggle('dark', isDark);
   }
 

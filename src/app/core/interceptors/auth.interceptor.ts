@@ -6,18 +6,22 @@ import {
   HttpEvent,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject, switchMap, filter, take } from 'rxjs';
+import { Observable, throwError, BehaviorSubject, switchMap, filter, take, catchError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject = new BehaviorSubject<string | null>(null);
 
-  constructor(private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private storage: StorageService,
+  ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('accessToken');
+    const token = this.storage.getItem('accessToken');
 
     if (token) {
       req = this.addToken(req, token);
@@ -69,6 +73,3 @@ export class AuthInterceptor implements HttpInterceptor {
     }
   }
 }
-
-// Need to import catchError
-import { catchError } from 'rxjs/operators';

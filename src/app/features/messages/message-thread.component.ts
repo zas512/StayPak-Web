@@ -266,6 +266,7 @@ export class MessageThreadComponent implements OnInit, OnDestroy {
   }
 
   private scrollToBottom() {
+    if (typeof document === 'undefined') return;
     setTimeout(() => {
       const container = document.querySelector('#messagesContainer') as HTMLElement;
       if (container) {

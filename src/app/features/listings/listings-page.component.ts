@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ListingsService } from '../../core/services/listings.service';
 import { AuthService } from '../../core/services/auth.service';
+import { StorageService } from '../../core/services/storage.service';
 import { Listing, ListingQueryParams, PaginatedListings, PropertyType } from '../../core/models/listing.model';
 import { ButtonDirective } from '../../shared/ui/button.directive';
 import { CardComponent } from '../../shared/ui/card.component';
@@ -276,6 +277,7 @@ import { BadgeComponent } from '../../shared/ui/badge.component';
 export class ListingsPageComponent implements OnInit {
   private listingsService = inject(ListingsService);
   private authService = inject(AuthService);
+  private storage = inject(StorageService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
@@ -302,10 +304,14 @@ export class ListingsPageComponent implements OnInit {
   amenities = signal<string[]>([]);
 
   ngOnInit() {
-    // Load from localStorage
-    const savedWishlist = localStorage.getItem('wishlist');
+    // Load from storage
+    const savedWishlist = this.storage.getItem('wishlist');
     if (savedWishlist) {
-      this.wishlist.set(JSON.parse(savedWishlist));
+      try {
+        this.wishlist.set(JSON.parse(savedWishlist));
+      } catch {
+        // Ignore JSON parse error
+      }
     }
 
     // Load amenities
@@ -461,6 +467,6 @@ export class ListingsPageComponent implements OnInit {
       current.push(listingId);
     }
     this.wishlist.set(current);
-    localStorage.setItem('wishlist', JSON.stringify(current));
+    this.storage.setItem('wishlist', JSON.stringify(current));
   }
 }

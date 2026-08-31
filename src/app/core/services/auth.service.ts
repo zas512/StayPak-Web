@@ -1,6 +1,7 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
+import { StorageService } from './storage.service';
 import { User, AuthTokens, LoginRequest, RegisterRequest, UpdateProfileRequest, CnicUploadRequest } from '../models/user.model';
 import { BehaviorSubject, tap, catchError, throwError, of } from 'rxjs';
 
@@ -17,13 +18,14 @@ export class AuthService {
   constructor(
     private api: ApiService,
     private router: Router,
+    private storage: StorageService,
   ) {
     this.initAuth();
   }
 
   private initAuth() {
-    const token = localStorage.getItem('accessToken');
-    const userData = localStorage.getItem('user');
+    const token = this.storage.getItem('accessToken');
+    const userData = this.storage.getItem('user');
     if (token && userData) {
       try {
         const user = JSON.parse(userData);
@@ -58,8 +60,8 @@ export class AuthService {
   }
 
   private handleAuthSuccess(tokens: AuthTokens) {
-    localStorage.setItem('accessToken', tokens.accessToken);
-    localStorage.setItem('refreshToken', tokens.refreshToken);
+    this.storage.setItem('accessToken', tokens.accessToken);
+    this.storage.setItem('refreshToken', tokens.refreshToken);
     this.fetchCurrentUser().subscribe({
       next: (user) => {
         this.loadingSubject.next(false);
@@ -77,15 +79,15 @@ export class AuthService {
       tap((user) => {
         this.currentUser.set(user);
         this.userSubject.next(user);
-        localStorage.setItem('user', JSON.stringify(user));
+        this.storage.setItem('user', JSON.stringify(user));
       }),
     );
   }
 
   logout() {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
+    this.storage.removeItem('accessToken');
+    this.storage.removeItem('refreshToken');
+    this.storage.removeItem('user');
     this.currentUser.set(null);
     this.userSubject.next(null);
     this.router.navigate(['/auth/login']);
@@ -96,7 +98,7 @@ export class AuthService {
       tap((user) => {
         this.currentUser.set(user);
         this.userSubject.next(user);
-        localStorage.setItem('user', JSON.stringify(user));
+        this.storage.setItem('user', JSON.stringify(user));
       }),
     );
   }
@@ -106,7 +108,7 @@ export class AuthService {
       tap((user) => {
         this.currentUser.set(user);
         this.userSubject.next(user);
-        localStorage.setItem('user', JSON.stringify(user));
+        this.storage.setItem('user', JSON.stringify(user));
       }),
     );
   }
@@ -116,19 +118,19 @@ export class AuthService {
       tap((user) => {
         this.currentUser.set(user);
         this.userSubject.next(user);
-        localStorage.setItem('user', JSON.stringify(user));
+        this.storage.setItem('user', JSON.stringify(user));
       }),
     );
   }
 
   refreshToken() {
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = this.storage.getItem('refreshToken');
     if (!refreshToken) return of(null);
 
     return this.api.post<AuthTokens>('/auth/refresh', { refreshToken }, false).pipe(
       tap((tokens) => {
-        localStorage.setItem('accessToken', tokens.accessToken);
-        localStorage.setItem('refreshToken', tokens.refreshToken);
+        this.storage.setItem('accessToken', tokens.accessToken);
+        this.storage.setItem('refreshToken', tokens.refreshToken);
       }),
       catchError(() => {
         this.logout();
@@ -138,12 +140,14 @@ export class AuthService {
   }
 
   googleLogin() {
-    window.location.href = `${this.api['baseUrl'].replace('/api', '')}/api/auth/google`;
+    if (this.storage.isBrowser) {
+      window.location.href = `${this.api['baseUrl'].replace('/api', '')}/api/auth/google`;
+    }
   }
 
   handleOAuthCallback(accessToken: string, refreshToken: string) {
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
+    this.storage.setItem('accessToken', accessToken);
+    this.storage.setItem('refreshToken', refreshToken);
     return this.fetchCurrentUser();
   }
 }
