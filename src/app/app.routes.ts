@@ -8,11 +8,13 @@ export const routes: Routes = [
   },
   {
     path: 'listings',
-    loadComponent: () => import('./features/listings/listings-page.component').then((m) => m.ListingsPageComponent),
+    loadComponent: () =>
+      import('./features/listings/listings-page.component').then((m) => m.ListingsPageComponent),
   },
   {
     path: 'listings/:id',
-    loadComponent: () => import('./features/listings/listing-detail.component').then((m) => m.ListingDetailComponent),
+    loadComponent: () =>
+      import('./features/listings/listing-detail.component').then((m) => m.ListingDetailComponent),
   },
   {
     path: 'auth/login',
@@ -22,66 +24,79 @@ export const routes: Routes = [
   {
     path: 'auth/register',
     canActivate: [GuestGuard],
-    loadComponent: () => import('./features/auth/register.component').then((m) => m.RegisterComponent),
+    loadComponent: () =>
+      import('./features/auth/register.component').then((m) => m.RegisterComponent),
   },
   {
     path: 'auth/callback',
-    loadComponent: () => import('./features/auth/callback.component').then((m) => m.AuthCallbackComponent),
+    loadComponent: () =>
+      import('./features/auth/callback.component').then((m) => m.AuthCallbackComponent),
   },
   {
     path: 'profile',
     canActivate: [AuthGuard],
-    loadComponent: () => import('./features/profile/profile.component').then((m) => m.ProfileComponent),
+    loadComponent: () =>
+      import('./features/profile/profile.component').then((m) => m.ProfileComponent),
   },
   {
     path: 'settings',
     canActivate: [AuthGuard],
-    loadComponent: () => import('./features/profile/settings.component').then((m) => m.SettingsComponent),
+    loadComponent: () =>
+      import('./features/profile/settings.component').then((m) => m.SettingsComponent),
   },
   {
     path: 'trips',
     canActivate: [AuthGuard],
-    loadComponent: () => import('./features/bookings/trips.component').then((m) => m.TripsComponent),
+    loadComponent: () =>
+      import('./features/bookings/trips.component').then((m) => m.TripsComponent),
   },
   {
     path: 'bookings/:id',
     canActivate: [AuthGuard],
-    loadComponent: () => import('./features/bookings/booking-detail.component').then((m) => m.BookingDetailComponent),
+    loadComponent: () =>
+      import('./features/bookings/booking-detail.component').then((m) => m.BookingDetailComponent),
   },
   {
     path: 'messages',
     canActivate: [AuthGuard],
-    loadComponent: () => import('./features/messages/messages.component').then((m) => m.MessagesComponent),
+    loadComponent: () =>
+      import('./features/messages/messages.component').then((m) => m.MessagesComponent),
   },
   {
     path: 'messages/:bookingId',
     canActivate: [AuthGuard],
-    loadComponent: () => import('./features/messages/message-thread.component').then((m) => m.MessageThreadComponent),
+    loadComponent: () =>
+      import('./features/messages/message-thread.component').then((m) => m.MessageThreadComponent),
   },
   {
     path: 'host',
     canActivate: [AuthGuard, HostGuard],
-    loadComponent: () => import('./features/host/host-dashboard.component').then((m) => m.HostDashboardComponent),
+    loadComponent: () =>
+      import('./features/host/host-dashboard.component').then((m) => m.HostDashboardComponent),
   },
   {
     path: 'host/dashboard',
     canActivate: [AuthGuard, HostGuard],
-    loadComponent: () => import('./features/host/host-dashboard.component').then((m) => m.HostDashboardComponent),
+    loadComponent: () =>
+      import('./features/host/host-dashboard.component').then((m) => m.HostDashboardComponent),
   },
   {
     path: 'host/listings/new',
     canActivate: [AuthGuard, HostGuard],
-    loadComponent: () => import('./features/host/create-listing.component').then((m) => m.CreateListingComponent),
+    loadComponent: () =>
+      import('./features/host/create-listing.component').then((m) => m.CreateListingComponent),
   },
   {
     path: 'host/listings/:id/edit',
     canActivate: [AuthGuard, HostGuard],
-    loadComponent: () => import('./features/host/edit-listing.component').then((m) => m.EditListingComponent),
+    loadComponent: () =>
+      import('./features/host/edit-listing.component').then((m) => m.EditListingComponent),
   },
   {
     path: 'host/bookings',
     canActivate: [AuthGuard, HostGuard],
-    loadComponent: () => import('./features/host/host-bookings.component').then((m) => m.HostBookingsComponent),
+    loadComponent: () =>
+      import('./features/host/host-bookings.component').then((m) => m.HostBookingsComponent),
   },
   {
     path: 'help',
@@ -97,10 +112,12 @@ export const routes: Routes = [
   },
   {
     path: 'privacy',
-    loadComponent: () => import('./features/help/privacy.component').then((m) => m.PrivacyComponent),
+    loadComponent: () =>
+      import('./features/help/privacy.component').then((m) => m.PrivacyComponent),
   },
   {
     path: '**',
-    loadComponent: () => import('./features/not-found/not-found.component').then((m) => m.NotFoundComponent),
+    loadComponent: () =>
+      import('./features/not-found/not-found.component').then((m) => m.NotFoundComponent),
   },
 ];
